@@ -2,9 +2,12 @@ using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 using MotionGenerator;
+using System.Xml;
 
 class TemplateGenerator
 {
+
+    // Create the Word motion from the case details and missing discovery.
     public void CreateMotion(Case caseInfo, List<DiscoveryItem> missingItems, string filePath)
     {
         // Create a new Word document
@@ -164,7 +167,7 @@ class TemplateGenerator
         }
 
         run.Append(runProperties);
-        run.Append(new Text(text));
+        run.Append(new Text(new string(text.Where(c => XmlConvert.IsXmlChar(c)).ToArray())));
 
         return run;
     }

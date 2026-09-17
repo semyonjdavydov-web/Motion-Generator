@@ -4,7 +4,7 @@ namespace MotionGenerator
 {
     public static class MotionLogic
     {
-        // Collects the case information from the user and returns a Case object containing the information.
+        // Collect the case details from the user.
         public static Case CollectCaseInfo()
         {
             Case caseInfo = new Case();
@@ -18,8 +18,7 @@ namespace MotionGenerator
             return caseInfo;
         }
 
-        // Displays the list of discovery items to the user and prompts them to select which items are missing.
-     
+        // Show the available discovery items.
         public static void DisplayDiscoveryOptions(List<DiscoveryItem> discoveryItems)
         {
             Console.WriteLine();
@@ -31,7 +30,7 @@ namespace MotionGenerator
             }
         }
 
-        // Prompts the user to select which discovery items are missing and updates the IsMissing property of the selected items.
+        // Let the user select each missing discovery item.
         public static void SelectMissingDiscovery(List<DiscoveryItem> discoveryItems)
         {
             bool selectAnotherItem = true;
@@ -56,7 +55,7 @@ namespace MotionGenerator
             }
         }
 
-        // Retrieves the list of discovery items that were selected as missing and returns them in a new list.
+        // Return the discovery items marked as missing.
         public static List<DiscoveryItem> GetMissingItems(List<DiscoveryItem> discoveryItems)
         {
             List<DiscoveryItem> missingItems = new List<DiscoveryItem>();
@@ -72,7 +71,7 @@ namespace MotionGenerator
             return missingItems;
         }
 
-        // Builds the output path for the Word document based on the case information and returns it as a string.
+        // Build the output file path from the defendant's name.
         public static string BuildOutputPath(Case caseInfo)
         {
             string safeDefendantName = MakeSafeFileName(caseInfo.DefendantName);
@@ -86,7 +85,7 @@ namespace MotionGenerator
             return outputPath;
         }
 
-        // Asks the user a question and returns their answer as a string.
+        // Ask a question until the user enters a value.
         public static string AskQuestion(string question)
         {
             string? answer = "";
@@ -112,7 +111,7 @@ namespace MotionGenerator
             return answer;
         }
 
-        // Asks the user to enter a number corresponding to a discovery item and returns the selected number.
+        // Ask for a valid discovery item number.
         public static int AskForDiscoveryNumber(int numberOfItems)
         {
             int choice = 0;
@@ -140,7 +139,7 @@ namespace MotionGenerator
             return choice;
         }
 
-        // Removes invalid characters from a string to create a safe file name.
+        // Replace characters that cannot be used in a file name.
         public static string MakeSafeFileName(string name)
         {
             char[] invalidCharacters = Path.GetInvalidFileNameChars();
@@ -155,7 +154,7 @@ namespace MotionGenerator
             return name;
         }
 
-        // Opens a Word document using the default program.
+        // Open the finished document in Word.
         public static void OpenWordDocument(string filePath)
         {
             try
